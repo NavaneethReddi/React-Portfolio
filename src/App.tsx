@@ -8,8 +8,6 @@ import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
 import './App.css';
 
- 
-
 const theme = {
   background: "linear-gradient(120deg, #232526 0%, #414345 100%)",
   card: "linear-gradient(135deg, #232526 60%, #3a3a3a 100%)",
@@ -39,6 +37,8 @@ export default function App() {
           maxWidth: 1600,
           margin: "0 auto",
           padding: "0 0 0 2vw",
+          width: "100%",
+          boxSizing: "border-box",
         }}
       >
         {/* Main Content */}
@@ -47,6 +47,8 @@ export default function App() {
             flex: 1,
             padding: "2.5rem 2vw 2.5rem 0",
             maxWidth: 1050,
+            width: "100%",
+            boxSizing: "border-box",
           }}
         >
           <section
@@ -58,6 +60,8 @@ export default function App() {
               marginBottom: "2.5rem",
               padding: "2.5rem 2rem",
               border: `1.5px solid ${theme.border}`,
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <Hero />
@@ -71,6 +75,8 @@ export default function App() {
               marginBottom: "2.5rem",
               padding: "2.5rem 2rem",
               border: `1.5px solid ${theme.border}`,
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <SkillsAndTech />
@@ -84,6 +90,8 @@ export default function App() {
               marginBottom: "2.5rem",
               padding: "2.5rem 2rem",
               border: `1.5px solid ${theme.border}`,
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <Projects />
@@ -97,6 +105,8 @@ export default function App() {
               marginBottom: "2.5rem",
               padding: "2.5rem 2rem",
               border: `1.5px solid ${theme.border}`,
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <Testimonial />
@@ -110,13 +120,17 @@ export default function App() {
               marginBottom: "2.5rem",
               padding: "2.5rem 2rem",
               border: `1.5px solid ${theme.border}`,
+              width: "100%",
+              boxSizing: "border-box",
             }}
           >
             <Contact />
           </section>
         </main>
         {/* TechNews Sidebar */}
-        <TechNews />
+        <div className="technews-wrapper">
+          <TechNews />
+        </div>
       </div>
       {/* Footer */}
       <footer
@@ -128,9 +142,9 @@ export default function App() {
           letterSpacing: "0.5px",
         }}
       >
-        &copy; {new Date().getFullYear()} Navaneeth Reddy. All rights reserved.
+        &copy; {new Date().getFullYear()} Your Name. All rights reserved.
       </footer>
-      {/* Global theming for scrollbars, selection, etc. */}
+      {/* Responsive styles */}
       <style>
         {`
           ::selection {
@@ -148,19 +162,42 @@ export default function App() {
           body {
             background: ${theme.background};
           }
+          @media (max-width: 1200px) {
+            .technews-wrapper {
+              display: none;
+            }
+            main {
+              max-width: 100vw !important;
+              padding-right: 0 !important;
+            }
+          }
+          @media (max-width: 900px) {
+            div[style*="flex-direction: row"] {
+              flex-direction: column !important;
+              padding-left: 0 !important;
+            }
+            main {
+              padding: 1.5rem 0.5rem !important;
+            }
+            section {
+              padding: 1.5rem 0.7rem !important;
+            }
+          }
+          @media (max-width: 600px) {
+            main {
+              padding: 0.5rem 0.1rem !important;
+            }
+            section {
+              padding: 1rem 0.2rem !important;
+              border-radius: 10px !important;
+            }
+            footer {
+              font-size: 0.92rem !important;
+              padding: 1rem 0 0.5rem 0 !important;
+            }
+          }
         `}
       </style>
     </div>
   );
 }
- 
- 
-
- 
- 
-
- 
-
- 
-
- 
