@@ -77,24 +77,7 @@ export default function  SkillsAndTech() {
           title: "Node.js"
         },
       ];
-      
-      const skills: string[] = [
-        "React.js",
-        "Angular",
-        "Vue.js",
-        "TypeScript",
-        "Redux, Zustand, Context API",
-        "HTML5, CSS3, SASS, Tailwind CSS",
-        "Jest, React Testing Library",
-        "Next.js, Gatsby",
-        "Figma, Adobe XD"
-      ];
-   // ...existing code...
-
-
-  // ...existing imports and code...
-
-   // ...techLogos and skills arrays...
+    
 
   // Calculate grid positions for each bubble
   const columns = 5; // Adjust for your layout
