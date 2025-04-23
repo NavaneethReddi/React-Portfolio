@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDownload, FaNewspaper, FaUser, FaBlog, FaImages } from "react-icons/fa";
+import { FaDownload} from "react-icons/fa";
 
 const menuItems = [
   { label: "Home", to: "#hero", icon: null },
