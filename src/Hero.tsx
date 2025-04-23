@@ -3,7 +3,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 import NavaneethPhoto from "./Navaneeth_linkedin.jpeg";
 
-const LINKEDIN_URL = "https://www.linkedin.com/in/navaneeth-reddy/";
+const LINKEDIN_URL = "https://www.linkedin.com/in/navaneeth-reddy-pinnapureddy/";
 
 const heroBg =
   "linear-gradient(120deg, #e0e7ef 0%, #f8fafc 100%, #e7f1ff 100%)";
