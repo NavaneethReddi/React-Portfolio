@@ -1,8 +1,7 @@
 import React from "react";
 import Testimonial from './Testimonial.tsx'
 import Contact from './Contact.tsx'
-import Resume from './Resume.tsx'
-import Hero from "./Hero.tsx";
+ import Hero from "./Hero.tsx";
 import Projects from "./Projects.tsx";
 import TechNews from "./TechNews.tsx";
 import SkillsAndTech from "./SkillsAndTech.tsx";
