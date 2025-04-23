@@ -10,7 +10,7 @@ const menuItems = [
   { label: "Contact", to: "#contact" },
 ];
 
-const RESUME_URL = "/Resume.docx"; // Place Resume.docx in your public folder
+const RESUME_URL = "/Resume.docx";
 
 const colorfulGradients = [
   "linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%)",
@@ -39,6 +39,8 @@ const liVariants = {
   hidden: { opacity: 0, y: -20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
+
+// ...existing imports and code...
 
 export default function MenuBar() {
   const [active, setActive] = React.useState<string | null>(null);
@@ -70,13 +72,14 @@ export default function MenuBar() {
         position: "sticky",
         top: 0,
         width: "100%",
-        background: "linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%)",
-        boxShadow: "0 4px 24px rgba(67,97,238,0.10)",
+        background: "linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%)",
+        boxShadow: "0 6px 24px rgba(67,97,238,0.13)",
         zIndex: 200,
         display: "flex",
         justifyContent: "center",
-        padding: "0.7rem 0",
-        backdropFilter: "blur(8px)",
+        alignItems: "center",
+        padding: "0.4rem 0",
+        minHeight: "64px",
         borderBottom: "2px solid #e7f1ff",
         transition: "box-shadow 0.2s",
       }}
@@ -87,11 +90,14 @@ export default function MenuBar() {
         animate="visible"
         style={{
           display: "flex",
-          gap: "2.5rem",
+          gap: "1.2rem",
           listStyle: "none",
           margin: 0,
           padding: 0,
           alignItems: "center",
+          width: "100%",
+          maxWidth: "1100px",
+          justifyContent: "space-between",
         }}
       >
         <AnimatePresence>
@@ -100,21 +106,21 @@ export default function MenuBar() {
               key={item.to}
               variants={liVariants}
               whileHover={{
-                scale: 1.13,
-                y: -3,
+                scale: 1.12,
+                y: -2,
                 boxShadow: "0 4px 18px rgba(67,97,238,0.13)",
               }}
               whileTap={{ scale: 0.97 }}
-              style={{ position: "relative" }}
+              style={{ position: "relative", flex: 1, textAlign: "center" }}
             >
               <a
                 href={item.to}
                 style={{
                   color: active === item.to ? "#fff" : "#22223b",
                   fontWeight: 700,
-                  fontSize: "1.12rem",
+                  fontSize: "1.08rem",
                   textDecoration: "none",
-                  padding: "0.5rem 1.2rem",
+                  padding: "0.5rem 0.7rem",
                   borderRadius: "8px",
                   transition: "background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s",
                   letterSpacing: "0.5px",
@@ -124,12 +130,13 @@ export default function MenuBar() {
                     ? colorfulGradients[idx % colorfulGradients.length]
                     : "transparent",
                   border: active === item.to ? "2px solid #fff" : "none",
+                  minWidth: 90,
                 }}
                 onMouseOver={e => {
                   e.currentTarget.style.background = colorfulGradients[idx % colorfulGradients.length];
                   e.currentTarget.style.color = "#fff";
                   e.currentTarget.style.boxShadow = "0 2px 12px rgba(67,97,238,0.10)";
-                  e.currentTarget.style.transform = "translateY(-2px) scale(1.06)";
+                  e.currentTarget.style.transform = "translateY(-2px) scale(1.07)";
                 }}
                 onMouseOut={e => {
                   e.currentTarget.style.background = active === item.to
@@ -164,12 +171,12 @@ export default function MenuBar() {
             key="download-resume"
             variants={liVariants}
             whileHover={{
-              scale: 1.13,
-              y: -3,
+              scale: 1.12,
+              y: -2,
               boxShadow: "0 4px 18px rgba(67,97,238,0.13)",
             }}
             whileTap={{ scale: 0.97 }}
-            style={{ position: "relative" }}
+            style={{ position: "relative", flex: 1, textAlign: "center" }}
           >
             <a
               href={RESUME_URL}
@@ -180,14 +187,16 @@ export default function MenuBar() {
                 gap: "0.7rem",
                 background: "linear-gradient(90deg, #007bff 0%, #4361ee 100%)",
                 color: "#fff",
-                padding: "0.5rem 1.2rem",
+                padding: "0.5rem 0.7rem",
                 borderRadius: "8px",
                 textDecoration: "none",
                 fontWeight: 700,
-                fontSize: "1.12rem",
+                fontSize: "1.08rem",
                 boxShadow: "0 2px 8px rgba(67,97,238,0.10)",
                 transition: "background 0.2s, transform 0.2s",
                 border: "2px solid #fff",
+                minWidth: 120,
+                justifyContent: "center",
               }}
               onMouseOver={e => (e.currentTarget.style.background = "linear-gradient(90deg, #4361ee 0%, #007bff 100%)")}
               onMouseOut={e => (e.currentTarget.style.background = "linear-gradient(90deg, #007bff 0%, #4361ee 100%)")}
