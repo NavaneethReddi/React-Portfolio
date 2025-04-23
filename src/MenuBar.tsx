@@ -8,6 +8,7 @@ const menuItems = [
   { label: "Projects", to: "#projects", icon: null },
   { label: "Testimonials", to: "#testimonials", icon: null },
   { label: "Contact", to: "#contact", icon: null },
+  // Uncomment below for more options
   // { label: "Tech News", to: "#tech-news", icon: <FaNewspaper /> },
   // { label: "About", to: "#about", icon: <FaUser /> },
   // { label: "Blog", to: "#blog", icon: <FaBlog /> },
@@ -15,18 +16,6 @@ const menuItems = [
 ];
 
 const RESUME_URL = "/Resume.docx";
-
-const colorfulGradients = [
-  "linear-gradient(90deg, #ffb347 0%, #ffcc33 100%)",
-  "linear-gradient(90deg, #43e97b 0%, #38f9d7 100%)",
-  "linear-gradient(90deg, #232526 0%, #414345 100%)",
-  "linear-gradient(90deg, #232526 0%, #ffb347 100%)",
-  "linear-gradient(90deg, #232526 0%, #43e97b 100%)",
-  "linear-gradient(90deg, #f7971e 0%, #ffd200 100%)",
-  "linear-gradient(90deg, #f857a6 0%, #ff5858 100%)",
-  "linear-gradient(90deg, #30cfd0 0%, #330867 100%)",
-  "linear-gradient(90deg, #fccb90 0%, #d57eeb 100%)",
-];
 
 const navVariants = {
   hidden: { y: -60, opacity: 0 },
@@ -78,33 +67,34 @@ export default function MenuBar() {
         position: "sticky",
         top: 0,
         width: "100%",
-        background: "linear-gradient(90deg, #232526 0%, #414345 100%)",
-        boxShadow: "0 4px 24px rgba(67,97,238,0.10)",
+        background: "rgba(34, 37, 38, 0.95)",
+        boxShadow: "0 8px 32px rgba(67,97,238,0.13)",
         zIndex: 200,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "0.4rem 0",
-        minHeight: "64px",
-        borderBottom: "2px solid #353b48",
+        padding: "0.7rem 0",
+        minHeight: "70px",
+        borderBottom: "none",
         transition: "box-shadow 0.2s",
+        backdropFilter: "blur(12px)",
       }}
     >
       <motion.ul
-       variants={ulVariants}
-       initial="hidden"
-       animate="visible"
-       style={{
-         display: "flex",
-         gap: "1.5rem", // Increased gap for more space between menu items
-         listStyle: "none",
-         margin: 0,
-         padding: 0,
-         alignItems: "center",
-         width: "100%",
-         maxWidth: "1200px",
-         justifyContent: "center",
-       }}
+        variants={ulVariants}
+        initial="hidden"
+        animate="visible"
+        style={{
+          display: "flex",
+          gap: "2.2rem",
+          listStyle: "none",
+          margin: 0,
+          padding: 0,
+          alignItems: "center",
+          width: "100%",
+          maxWidth: "1100px",
+          justifyContent: "center",
+        }}
       >
         <AnimatePresence>
           {menuItems.map((item, idx) => (
@@ -112,72 +102,58 @@ export default function MenuBar() {
               key={item.to}
               variants={liVariants}
               whileHover={{
-                scale: 1.12,
-                y: -2,
-                boxShadow: "0 4px 18px rgba(67,97,238,0.13)",
+                scale: 1.13,
+                y: -4,
+                boxShadow: "0 8px 24px rgba(255,179,71,0.13)",
               }}
               whileTap={{ scale: 0.97 }}
-              style={{ position: "relative", textAlign: "center" }}
+              style={{
+                position: "relative",
+                textAlign: "center",
+                borderRadius: "50px",
+                overflow: "hidden",
+                background: active === item.to
+                  ? "linear-gradient(90deg, #ffb347 0%, #43e97b 100%)"
+                  : "transparent",
+                transition: "background 0.2s",
+              }}
             >
- 
- <a
-  href={item.to}
-  style={{
-    color: active === item.to ? "#232526" : "#232526",
-    fontWeight: 700,
-    fontSize: "1.08rem",
-    textDecoration: "none",
-    padding: "0.5rem 1.1rem",
-    borderRadius: "8px",
-    transition: "background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s",
-    letterSpacing: "0.5px",
-    boxShadow: "0 0 0 rgba(67,97,238,0)",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.5rem",
-    background: active === item.to
-      ? colorfulGradients[idx % colorfulGradients.length]
-      : "#fffbf3",
-    border: active === item.to ? "2px solid #ffb347" : "2px solid transparent",
-    minWidth: 90,
-    justifyContent: "center",
-    outline: "none",
-    position: "relative",
-    top: 0,
-  }}
-  onMouseOver={e => {
-    e.currentTarget.style.background = colorfulGradients[idx % colorfulGradients.length];
-    e.currentTarget.style.color = "#232526";
-    e.currentTarget.style.boxShadow = "0 2px 12px rgba(67,97,238,0.10)";
-    e.currentTarget.style.transform = "scale(1.07)";
-    e.currentTarget.style.top = "-2px";
-    e.currentTarget.style.border = "2px solid #ffb347";
-  }}
-  onMouseOut={e => {
-    e.currentTarget.style.background = active === item.to
-      ? colorfulGradients[idx % colorfulGradients.length]
-      : "#fffbf3";
-    e.currentTarget.style.color = "#232526";
-    e.currentTarget.style.boxShadow = "0 0 0 rgba(67,97,238,0)";
-    e.currentTarget.style.transform = "none";
-    e.currentTarget.style.top = "0";
-    e.currentTarget.style.border = active === item.to ? "2px solid #ffb347" : "2px solid transparent";
-  }}
->
-  {item.icon && <span>{item.icon}</span>}
-  {item.label}
-</a>
+              <a
+               href={item.to}
+               style={{
+                 color: active === item.to ? "#232526" : "#f8fafc",
+                 fontWeight: 700,
+                 fontSize: "1.08rem",
+                 textDecoration: "none",
+                 padding: "0.7em 1.5em", // Use em units for auto scaling with font size
+                 borderRadius: "50px",
+                 transition: "background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s",
+                 letterSpacing: "0.5px",
+                 boxShadow: "none",
+                 display: "inline-flex",
+                 alignItems: "center",
+                 gap: "0.7em",
+                 background: "transparent",
+                 border: "none",
+                 minWidth: 90,
+                 justifyContent: "center",
+                 whiteSpace: "nowrap", // Prevents text wrapping
+               }}
+              >
+                {item.icon && <span>{item.icon}</span>}
+                {item.label}
+              </a>
               {active === item.to && (
                 <motion.div
                   layoutId="menu-underline"
                   style={{
                     position: "absolute",
-                    left: 12,
-                    right: 12,
-                    bottom: 6,
+                    left: "25%",
+                    right: "25%",
+                    bottom: 8,
                     height: 4,
                     borderRadius: 2,
-                    background: colorfulGradients[idx % colorfulGradients.length],
+                    background: "linear-gradient(90deg, #ffb347 0%, #43e97b 100%)",
                   }}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
@@ -189,12 +165,19 @@ export default function MenuBar() {
             key="download-resume"
             variants={liVariants}
             whileHover={{
-              scale: 1.12,
-              y: -2,
-              boxShadow: "0 4px 18px rgba(67,97,238,0.13)",
+              scale: 1.13,
+              y: -4,
+              boxShadow: "0 8px 24px rgba(255,179,71,0.13)",
             }}
             whileTap={{ scale: 0.97 }}
-            style={{ position: "relative", textAlign: "center" }}
+            style={{
+              position: "relative",
+              textAlign: "center",
+              borderRadius: "50px",
+              overflow: "hidden",
+              background: "linear-gradient(90deg, #ffb347 0%, #43e97b 100%)",
+              transition: "background 0.2s",
+            }}
           >
             <a
               href={RESUME_URL}
@@ -203,21 +186,29 @@ export default function MenuBar() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "0.7rem",
-                background: "linear-gradient(90deg, #ffb347 0%, #232526 100%)",
+                background: "transparent",
                 color: "#232526",
-                padding: "0.5rem 1.1rem",
-                borderRadius: "8px",
+                padding: "0.7rem 2.2rem",
+                borderRadius: "50px",
                 textDecoration: "none",
                 fontWeight: 700,
                 fontSize: "1.08rem",
-                boxShadow: "0 2px 8px rgba(67,97,238,0.10)",
+                boxShadow: "none",
                 transition: "background 0.2s, transform 0.2s",
-                border: "2px solid #ffb347",
+                border: "none",
                 minWidth: 120,
                 justifyContent: "center",
               }}
-              onMouseOver={e => (e.currentTarget.style.background = "linear-gradient(90deg, #232526 0%, #ffb347 100%)")}
-              onMouseOut={e => (e.currentTarget.style.background = "linear-gradient(90deg, #ffb347 0%, #232526 100%)")}
+              onMouseOver={e => {
+                e.currentTarget.style.background = "rgba(255,255,255,0.18)";
+                e.currentTarget.style.color = "#232526";
+                e.currentTarget.style.transform = "scale(1.09)";
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "#232526";
+                e.currentTarget.style.transform = "none";
+              }}
             >
               <FaDownload /> Download Resume
             </a>
