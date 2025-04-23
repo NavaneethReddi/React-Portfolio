@@ -87,72 +87,79 @@ export default function  SkillsAndTech() {
    // ...existing code...
 
 
-   const bubbleFloatVariants = {
-    animate: (i: number) => ({
-      y: [0, -20, 0, 20, 0],
-      x: [0, 10 * ((i % 2) * 2 - 1), 0, -10 * ((i % 2) * 2 - 1), 0],
+  // ...existing imports and code...
+
+   // ...techLogos and skills arrays...
+
+  // Calculate grid positions for each bubble
+  const columns = 5; // Adjust for your layout
+  const rowHeight = 160;
+  const colWidth = 180;
+
+  // Bubble animation: float within a small area around its grid cell
+  const getBubbleAnimation = (i: number) => {
+    const x1 = Math.random() * 30 - 15;
+    const y1 = Math.random() * 30 - 15;
+    const x2 = Math.random() * 30 - 15;
+    const y2 = Math.random() * 30 - 15;
+    return {
+      x: [0, x1, x2, 0],
+      y: [0, y1, y2, 0],
       transition: {
-        duration: 5 + (i % 5),
+        duration: 7 + Math.random() * 2,
         repeat: Infinity,
         repeatType: "loop",
         ease: "easeInOut",
-        delay: i * 0.15,
+        delay: i * 0.18,
       },
-    }),
+    };
   };
 
- 
-  
-  // ...your techLogos and skills arrays...
-   
-  
-     return (
-      <section
-        className="skills-tech"
+  return (
+    <section
+      className="skills-tech"
+      style={{
+        background: "linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%)",
+        padding: "3rem 0",
+        minHeight: "40vh",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
         style={{
-          background: "linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%)",
-          padding: "3rem 0",
-          minHeight: "40vh",
-          overflow: "hidden",
-          position: "relative",
+          textAlign: "center",
+          fontSize: "2rem",
+          fontWeight: 700,
+          color: "#22223b",
+          marginBottom: "2.5rem",
+          letterSpacing: "1px",
         }}
       >
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          style={{
-            textAlign: "center",
-            fontSize: "2rem",
-            fontWeight: 700,
-            color: "#22223b",
-            marginBottom: "2.5rem",
-            letterSpacing: "1px",
-          }}
-        >
-          Skills &amp; Technology Stack
-        </motion.h2>
-        <div
-          className="skills-bubbles-grid"
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "2.5rem",
-            justifyContent: "center",
-            alignItems: "center",
-            maxWidth: "1000px",
-            margin: "0 auto",
-            position: "relative",
-          }}
-        >
-          {techLogos.map((logo, idx) => (
+        Skills &amp; Technology Stack
+      </motion.h2>
+      <div
+        className="skills-bubbles-grid"
+        style={{
+          position: "relative",
+          width: "100%",
+          height: `${Math.ceil(techLogos.length / columns) * rowHeight}px`,
+          maxWidth: "1100px",
+          margin: "0 auto",
+        }}
+      >
+        {techLogos.map((logo, idx) => {
+          const row = Math.floor(idx / columns);
+          const col = idx % columns;
+          return (
             <motion.div
               className="skill-bubble"
               key={logo.title}
-              custom={idx}
-              variants={bubbleFloatVariants}
-              animate="animate"
+              animate={getBubbleAnimation(idx)}
               style={{
                 width: 110,
                 height: 110,
@@ -165,9 +172,11 @@ export default function  SkillsAndTech() {
                 justifyContent: "center",
                 cursor: "pointer",
                 border: "3px solid #e0e7ef",
-                transition: "box-shadow 0.2s, background 0.2s, transform 0.2s",
-                position: "relative",
+                position: "absolute",
+                left: `${col * colWidth + 30}px`,
+                top: `${row * rowHeight + 20}px`,
                 zIndex: 1,
+                transition: "box-shadow 0.2s, background 0.2s, transform 0.2s",
               }}
               whileHover={{
                 scale: 1.13,
@@ -204,26 +213,9 @@ export default function  SkillsAndTech() {
                 {logo.title}
               </span>
             </motion.div>
-          ))}
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          viewport={{ once: true }}
-          style={{
-            marginTop: "2.5rem",
-            textAlign: "center",
-            color: "#5f6c7b",
-            fontSize: "1.08rem",
-            maxWidth: "700px",
-            marginLeft: "auto",
-            marginRight: "auto",
-          }}
-        >
-          <strong>Other Skills:</strong> {skills.join(", ")}
-        </motion.div>
-      </section>
-    );
-  }
-  
+          );
+        })}
+      </div>
+    </section>
+  );
+}
