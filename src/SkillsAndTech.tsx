@@ -70,7 +70,12 @@ export default function  SkillsAndTech() {
           src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
           alt: "GitHub",
           title: "GitHub"
-        }
+        },
+        {
+          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+          alt: "Node.js",
+          title: "Node.js"
+        },
       ];
       
       const skills: string[] = [
