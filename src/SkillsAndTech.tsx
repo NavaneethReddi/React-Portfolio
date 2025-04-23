@@ -94,7 +94,7 @@ export default function  SkillsAndTech() {
       x: [0, x1, x2, 0],
       y: [0, y1, y2, 0],
       transition: {
-        duration: 7 + Math.random() * 2,
+        duration: 3 + Math.random() * 1.5, // Reduced duration for faster movement
         repeat: Infinity,
         repeatType: "loop",
         ease: "easeInOut",
