@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import karenImg from "./image.png";
 import jagadeeshImg from "./assets/jagadeesh.png";
 import bradImg from "./assets/brad.png";
-
 
 type Testimonial = {
   name: string;
@@ -11,7 +10,6 @@ type Testimonial = {
   avatar?: string;
   rating?: number;
 };
-
 
 const testimonials: Testimonial[] = [
   {
@@ -35,7 +33,7 @@ const testimonials: Testimonial[] = [
     feedback:
       "A valuable and productive technical resource. Has a great ability to connect with stakeholders and create operational efficiencies through software enhancements.",
     role: "Product Owner, Salesforce",
-    avatar: bradImg, // Use a placeholder if image not available
+    avatar: bradImg,
     rating: 5,
   },
 ];
@@ -51,6 +49,13 @@ function StarRating({ rating = 5 }: { rating?: number }) {
 }
 
 export default function Testimonials() {
+  const [paused, setPaused] = useState(false);
+
+  // Duplicate testimonials for infinite effect
+  const trainTestimonials = [...testimonials, ...testimonials];
+
+   
+
   return (
     <div
       style={{
@@ -78,17 +83,20 @@ export default function Testimonials() {
           overflow: "hidden",
           position: "relative",
         }}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
             animation: "testimonial-train 18s linear infinite",
+            animationPlayState: paused ? "paused" : "running",
             gap: "2rem",
             willChange: "transform",
           }}
         >
-          {[...testimonials, ...testimonials].map((t, idx) => (
+          {trainTestimonials.map((t, idx) => (
             <div
               key={idx}
               style={{
@@ -104,7 +112,7 @@ export default function Testimonials() {
                 flexDirection: "column",
                 alignItems: "center",
                 marginBottom: "1rem",
-              }}
+               }}
             >
               <img
                 src={t.avatar}
@@ -167,6 +175,8 @@ export default function Testimonials() {
             div[style*="min-width: 340px"] {
               min-width: 90vw !important;
               max-width: 90vw !important;
+              min-height: 320px !important;
+              max-height: 320px !important;
             }
           }
         `}
