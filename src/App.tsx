@@ -4,7 +4,7 @@ import Contact from './Contact.tsx'
  import Hero from "./Hero.tsx";
 import Projects from "./Projects.tsx";
 import TechNews from "./TechNews.tsx";
-import Certificate from "./Certificate.tsx";
+// import Certificate from "./Certificate.tsx";
 
 import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
@@ -103,7 +103,7 @@ export default function App() {
           >
             <Projects />
           </section>
-          <Certificate />
+          {/* <Certificate /> */}
           <section
             id="testimonials"
             style={{
