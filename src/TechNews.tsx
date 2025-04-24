@@ -15,7 +15,7 @@ export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: bo
 
   useEffect(() => {
     fetch(
-      "https://gnews.io/api/v4/top-headlines?category=technology&lang=en&max=7&apikey=6e068mmma8d7eaa698f2767ee50a2d31458"
+      "https://gnews.io/api/v4/top-headlines?category=technology&lang=en&max=7&apikey=6e068a8d7eaa698f2767ee50a2d31458"
     )
       .then((res) => res.json())
       .then((data) => {
