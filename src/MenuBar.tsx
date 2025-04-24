@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaDownload, FaBars, FaTimes } from "react-icons/fa";
+import { FaDownload, FaBars, FaTimes,FaGithub } from "react-icons/fa";
 
 const menuItems = [
   { label: "Home", to: "#hero", icon: null },
@@ -203,31 +203,54 @@ export default function MenuBar() {
                 transition: "background 0.2s",
               }}
             >
-              <a
+              <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+        {/* Add more menu items here if needed */}
+        <a
                 href={RESUME_URL}
                 download
-                onClick={handleNavClick}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.7rem",
-                  background: "transparent",
-                  color: "#232526",
-                  padding: "0.7em 1.5em",
-                  borderRadius: "50px",
-                  textDecoration: "none",
-                  fontWeight: 700,
-                  fontSize: "1.08rem",
-                  boxShadow: "none",
-                  transition: "background 0.2s, transform 0.2s",
-                  border: "none",
-                  minWidth: 120,
-                  justifyContent: "center",
-                }}
-              >
-                <FaDownload /> Download Resume
-              </a>
+          style={{
+            display: "flex",
+            alignItems: "center",
+            background: "linear-gradient(90deg, #4361ee 0%, #ffb347 100%)",
+            color: "#fff",
+            padding: "0.6rem 1.5rem",
+            borderRadius: "24px",
+            fontWeight: 600,
+            fontSize: "1rem",
+            textDecoration: "none",
+            boxShadow: "0 2px 8px rgba(67,97,238,0.10)",
+            transition: "background 0.2s, box-shadow 0.2s",
+            gap: "0.6rem",
+          }}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FaDownload style={{ fontSize: "1.1rem" }} />
+          Resume
+        </a>
+       
+      </div>
+      
             </motion.li>
+            <a
+          href="https://github.com/NavaneethReddi"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            color: "#fff",
+            background: "none",
+            fontSize: "1.35rem",
+            textDecoration: "none",
+            padding: "0.4rem",
+            borderRadius: "50%",
+            transition: "background 0.2s",
+          }}
+          aria-label="GitHub"
+        >
+          <FaGithub />
+        </a>
           </AnimatePresence>
         </motion.ul>
       </motion.nav>

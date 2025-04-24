@@ -4,7 +4,7 @@ import Contact from './Contact.tsx'
  import Hero from "./Hero.tsx";
 import Projects from "./Projects.tsx";
 import TechNews from "./TechNews.tsx";
-// import Certificate from "./Certificate.tsx";
+ import ChatWithMe from "./ChatWithMe.tsx";
 
 import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
@@ -155,6 +155,7 @@ export default function App() {
         &copy; {new Date().getFullYear()} Your Name. All rights reserved.
       </footer>
       {/* Responsive styles */}
+      <ChatWithMe />
       <style>
         {`
           ::selection {
