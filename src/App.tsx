@@ -145,8 +145,7 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [techNewsDone, setTechNewsDone] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [renderTechNews, setRenderTechNews] = useState(true); // <-- Add this
-  
+   
 
   // Called by TechNews when API is done (success or fail)
  
@@ -169,7 +168,7 @@ export default function App() {
 
   return (
     <>
-          {showSplash && <TechLogSplash   />}
+          {showSplash && <TechLogSplash  loading={loading}  />}
      {!showSplash && (
         <TechNews
           initialArticles={techNewsData?.articles}
