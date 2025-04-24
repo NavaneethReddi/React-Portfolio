@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-type Article = {
-  title: string;
-  url: string;
-  description: string;
-  publishedAt: string;
-  source: { name: string };
-};
+ 
 
 export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: boolean) => void }) {
   const [articles, setArticles] = useState([]);
