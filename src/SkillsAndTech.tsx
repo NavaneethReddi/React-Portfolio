@@ -1,88 +1,72 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// ...other code...
+const techLogos = [
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    alt: "React",
+    title: "React",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    alt: "TypeScript",
+    title: "TypeScript",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    alt: "JavaScript",
+    title: "JavaScript",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    alt: "HTML5",
+    title: "HTML5",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    alt: "CSS3",
+    title: "CSS3",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
+    alt: "Redux",
+    title: "Redux",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    alt: "Git",
+    title: "Git",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    alt: "GitHub",
+    title: "GitHub",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    alt: "Node.js",
+    title: "Node.js",
+  },
+  // Add more logos as needed
+];
 
-export default function  SkillsAndTech() {
-    type TechLogo = {
-        src: string;
-        alt: string;
-        title: string;
-      };
-      
-      const techLogos: TechLogo[] = [
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-          alt: "React",
-          title: "React"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
-          alt: "Angular",
-          title: "Angular"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
-          alt: "Vue",
-          title: "Vue"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
-          alt: "JavaScript",
-          title: "JavaScript"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-          alt: "TypeScript",
-          title: "TypeScript"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
-          alt: "HTML5",
-          title: "HTML5"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-          alt: "CSS3",
-          title: "CSS3"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
-          alt: "SASS",
-          title: "SASS"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
-          alt: "Redux",
-          title: "Redux"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-          alt: "Next.js",
-          title: "Next.js"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-          alt: "Git",
-          title: "Git"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-          alt: "GitHub",
-          title: "GitHub"
-        },
-        {
-          src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-          alt: "Node.js",
-          title: "Node.js"
-        },
-      ];
-    
+const rowHeight = 160;
+const colWidth = 180;
 
-  // Calculate grid positions for each bubble
-  const columns = 5; // Adjust for your layout
-  const rowHeight = 160;
-  const colWidth = 180;
+const getColumns = () => {
+  if (window.innerWidth < 600) return 2;
+  if (window.innerWidth < 900) return 3;
+  return 5;
+};
+
+export default function SkillsAndTech() {
+  const [columns, setColumns] = React.useState(getColumns());
+
+  React.useEffect(() => {
+    const handleResize = () => setColumns(getColumns());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Bubble animation: float within a small area around its grid cell
   const getBubbleAnimation = (i: number) => {
@@ -94,7 +78,7 @@ export default function  SkillsAndTech() {
       x: [0, x1, x2, 0],
       y: [0, y1, y2, 0],
       transition: {
-        duration: 3 + Math.random() * 1.5, // Reduced duration for faster movement
+        duration: 3 + Math.random() * 1.5,
         repeat: Infinity,
         repeatType: "loop",
         ease: "easeInOut",
@@ -112,6 +96,11 @@ export default function  SkillsAndTech() {
         minHeight: "40vh",
         overflow: "hidden",
         position: "relative",
+        width: "100%",
+        boxSizing: "border-box",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <motion.h2
@@ -135,9 +124,15 @@ export default function  SkillsAndTech() {
         style={{
           position: "relative",
           width: "100%",
-          height: `${Math.ceil(techLogos.length / columns) * rowHeight}px`,
-          maxWidth: "1100px",
+          maxWidth: 950,
           margin: "0 auto",
+          minHeight: `${Math.ceil(techLogos.length / columns) * rowHeight}px`,
+          overflow: "hidden",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          boxSizing: "border-box",
         }}
       >
         {techLogos.map((logo, idx) => {
@@ -145,7 +140,6 @@ export default function  SkillsAndTech() {
           const col = idx % columns;
           return (
             <motion.div
-              className="skill-bubble"
               key={logo.title}
               animate={getBubbleAnimation(idx)}
               style={{
