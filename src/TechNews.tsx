@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 
- 
-
-export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: boolean) => void }) {
-  const [articles, setArticles] = useState([]);
+export default function TechNews({
+  onApiSuccess,
+  initialArticles = [],
+  initialApiSuccess = false,
+  hidden = false,
+}: {
+  onApiSuccess?: (success: boolean, articles?: any[]) => void;
+  initialArticles?: any[];
+  initialApiSuccess?: boolean;
+  hidden?: boolean;
+}) {
+  const [articles, setArticles] = useState(initialArticles);
   const [loading, setLoading] = useState(true);
-  const [apiSuccess, setApiSuccess] = useState(false);
+  const [apiSuccess, setApiSuccess] = useState(initialApiSuccess);
 
   useEffect(() => {
     fetch(
@@ -17,7 +25,7 @@ export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: bo
         setArticles(success ? data.articles : []);
         setApiSuccess(success);
         setLoading(false);
-        if (onApiSuccess) onApiSuccess(success);
+        if (onApiSuccess) onApiSuccess(success, success ? data.articles : []);
       })
       .catch(() => {
         setApiSuccess(false);
@@ -26,38 +34,43 @@ export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: bo
       });
   }, [onApiSuccess]);
 
-  if (!apiSuccess) return null;
+  if (hidden || !apiSuccess) return null;
 
   return (
     <aside
-    style={{
-      position: "fixed",
-      right: 32, // Move 32px from the right edge (adjust as needed)
-      top: 90,
-      width: 340,
-      minWidth: 260,
-      maxWidth: 380,
-      background: "#fff",
-      borderRadius: "14px 0 0 14px",
-      boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
-      padding: "1.2rem 1.3rem 1.2rem 1.3rem",
-      margin: "0",
-      height: "auto",
-      maxHeight: "80vh",
-      overflowY: "auto",
-      zIndex: 300,
-    }}
+      style={{
+        position: "fixed",
+        right: 32, // Move 32px from the right edge (adjust as needed)
+        top: 90,
+        width: 340,
+        minWidth: 260,
+        maxWidth: 380,
+        background: "#fff",
+        borderRadius: "14px 0 0 14px",
+        boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
+        padding: "1.2rem 1.3rem 1.2rem 1.3rem",
+        margin: "0",
+        height: "auto",
+        maxHeight: "80vh",
+        overflowY: "auto",
+        zIndex: 300,
+      }}
     >
-      <h3 style={{
-        color: "#4361ee",
-        fontWeight: 700,
-        fontSize: "1.13rem",
-        marginBottom: "1.1rem",
-        letterSpacing: "0.5px",
-        borderBottom: "1px solid #e7f1ff",
-        paddingBottom: "0.7rem"
-      }}>
-        <span role="img" aria-label="news">📰</span> Tech News
+      <h3
+        style={{
+          color: "#4361ee",
+          fontWeight: 700,
+          fontSize: "1.13rem",
+          marginBottom: "1.1rem",
+          letterSpacing: "0.5px",
+          borderBottom: "1px solid #e7f1ff",
+          paddingBottom: "0.7rem",
+        }}
+      >
+        <span role="img" aria-label="news">
+          📰
+        </span>{" "}
+        Tech News
       </h3>
       {loading ? (
         <div style={{ textAlign: "center", color: "#888" }}>Loading...</div>
@@ -79,8 +92,8 @@ export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: bo
                   marginBottom: "0.2rem",
                   transition: "color 0.18s",
                 }}
-                onMouseOver={e => (e.currentTarget.style.color = "#4361ee")}
-                onMouseOut={e => (e.currentTarget.style.color = "#22223b")}
+                onMouseOver={(e) => (e.currentTarget.style.color = "#4361ee")}
+                onMouseOut={(e) => (e.currentTarget.style.color = "#22223b")}
               >
                 {article.title}
               </a>
