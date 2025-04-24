@@ -8,6 +8,8 @@ import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
 import './App.css';
 
+ 
+
 const theme = {
   background: "linear-gradient(120deg, #232526 0%, #414345 100%)",
   card: "linear-gradient(135deg, #232526 60%, #3a3a3a 100%)",
@@ -19,6 +21,8 @@ const theme = {
 };
 
 export default function App() {
+  const [showTechNews, setShowTechNews] = React.useState(true);
+
   return (
     <div
       style={{
@@ -39,6 +43,7 @@ export default function App() {
           padding: "0 0 0 2vw",
           width: "100%",
           boxSizing: "border-box",
+          justifyContent: !showTechNews ? "center" : "flex-start",
         }}
       >
         {/* Main Content */}
@@ -128,9 +133,11 @@ export default function App() {
           </section>
         </main>
         {/* TechNews Sidebar */}
-        <div className="technews-wrapper">
-          <TechNews />
-        </div>
+        {showTechNews && (
+          <div className="technews-wrapper">
+            <TechNews onApiSuccess={setShowTechNews} />
+          </div>
+        )}
       </div>
       {/* Footer */}
       <footer

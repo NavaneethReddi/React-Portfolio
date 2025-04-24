@@ -8,44 +8,51 @@ type Article = {
   source: { name: string };
 };
 
-export default function TechNews() {
-  const [articles, setArticles] = useState<Article[]>([]);
+export default function TechNews({ onApiSuccess }: { onApiSuccess?: (success: boolean) => void }) {
+  const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [apiSuccess, setApiSuccess] = useState(false);
 
   useEffect(() => {
-    // Replace 'YOUR_API_KEY' with your free GNews API key from https://gnews.io/
     fetch(
       "https://gnews.io/api/v4/top-headlines?category=technology&lang=en&max=7&apikey=6e068a8d7eaa698f2767ee50a2d31458"
     )
       .then((res) => res.json())
       .then((data) => {
-        setArticles(data.articles || []);
+        const success = data.articles && Array.isArray(data.articles) && data.articles.length > 0;
+        setArticles(success ? data.articles : []);
+        setApiSuccess(success);
         setLoading(false);
+        if (onApiSuccess) onApiSuccess(success);
+      })
+      .catch(() => {
+        setApiSuccess(false);
+        setLoading(false);
+        if (onApiSuccess) onApiSuccess(false);
       });
-  }, []);
+  }, [onApiSuccess]);
+
+  if (!apiSuccess) return null;
 
   return (
     <aside
-      style={{
-        position: "fixed",
-        right: "2.5vw",
-        top: 100,
-        width: 340,
-        minWidth: 260,
-        maxWidth: 380,
-        background: "#fff",
-        borderRadius: "18px",
-        boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
-        padding: "1.5rem 1.5rem 1.2rem 1.5rem",
-        margin: 0,
-        height: "auto",
-        maxHeight: "80vh",
-        overflowY: "auto",
-        zIndex: 300,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-      }}
+    style={{
+      position: "fixed",
+      right: 32, // Move 32px from the right edge (adjust as needed)
+      top: 90,
+      width: 340,
+      minWidth: 260,
+      maxWidth: 380,
+      background: "#fff",
+      borderRadius: "14px 0 0 14px",
+      boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
+      padding: "1.2rem 1.3rem 1.2rem 1.3rem",
+      margin: "0",
+      height: "auto",
+      maxHeight: "80vh",
+      overflowY: "auto",
+      zIndex: 300,
+    }}
     >
       <h3 style={{
         color: "#4361ee",
@@ -54,15 +61,14 @@ export default function TechNews() {
         marginBottom: "1.1rem",
         letterSpacing: "0.5px",
         borderBottom: "1px solid #e7f1ff",
-        paddingBottom: "0.7rem",
-        width: "100%",
+        paddingBottom: "0.7rem"
       }}>
         <span role="img" aria-label="news">📰</span> Tech News
       </h3>
       {loading ? (
-        <div style={{ textAlign: "center", color: "#888", width: "100%" }}>Loading...</div>
+        <div style={{ textAlign: "center", color: "#888" }}>Loading...</div>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0, margin: 0, width: "100%" }}>
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {articles.map((article, idx) => (
             <li key={idx} style={{ marginBottom: "1.1rem" }}>
               <a
@@ -78,7 +84,6 @@ export default function TechNews() {
                   lineHeight: 1.3,
                   marginBottom: "0.2rem",
                   transition: "color 0.18s",
-                  paddingRight: "0.2rem",
                 }}
                 onMouseOver={e => (e.currentTarget.style.color = "#4361ee")}
                 onMouseOut={e => (e.currentTarget.style.color = "#22223b")}
@@ -92,7 +97,7 @@ export default function TechNews() {
           ))}
         </ul>
       )}
-      <div style={{ textAlign: "right", marginTop: "0.7rem", width: "100%" }}>
+      <div style={{ textAlign: "right", marginTop: "0.7rem" }}>
         <a
           href="https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFZ4Y0dNU0FtVnVLQUFQAQ?oc=3"
           target="_blank"
