@@ -174,7 +174,6 @@ export default function App() {
       />
  
       {!showSplash && (
-        
         <div
           style={{
             minHeight: "100vh",
@@ -182,6 +181,8 @@ export default function App() {
             color: theme.text,
             fontFamily: "Inter, Segoe UI, Arial, sans-serif",
             position: "relative",
+            marginLeft: window.innerWidth <= 768 ? 0 : 300, // Move content to the right on desktop (adjust 360 to match your TechNews width + gap)
+            transition: "margin-left 0.3s",
           }}
         >
           <MenuBar />
@@ -366,4 +367,3 @@ export default function App() {
 
 // TechNews.tsx
 // Do NOT call useTechNewsApi here, just use the props!
- 
