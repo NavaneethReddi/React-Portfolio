@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import type { Article } from "./api";
- import { FaBolt } from "react-icons/fa";
-
+ 
 
 export default function TechNews({
   articles = [],
@@ -17,7 +16,7 @@ export default function TechNews({
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 600;
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  if (hidden) return null;
+  if (!apiSuccess) return null;
 
   return (
     <>
@@ -67,26 +66,25 @@ export default function TechNews({
   </button>
 )}
       {(isMobile ? mobileOpen : true) && (
-        <aside
-          style={{
-            position: "fixed",
-            top: 0,
-            right: 0,
-            height: "100vh",
-            width: isMobile ? "85vw" : 340,
-            maxWidth: 400,
-            background: "#fff",
-            borderRadius: isMobile ? "18px 0 0 18px" : "14px 0 0 14px",
-            boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
-            padding: isMobile ? "1.2rem 1rem 1.2rem 1rem" : "1.2rem 1.3rem",
-            margin: 0,
-            overflowY: "auto",
-            zIndex: 1002,
-            transition: "transform 0.3s",
-            // Slide in from right on mobile
-            transform: isMobile && !mobileOpen ? "translateX(100%)" : "translateX(0)",
-          }}
-        >
+       <aside
+       style={{
+         position: "fixed",
+         top: isMobile ? 0 : 100, // Set to your MenuBar height (e.g., 64px)
+         right: 0,
+         height: isMobile ? "100vh" : "calc(100vh - 64px)", // Adjust height to not overlap MenuBar
+         width: isMobile ? "65vw" : 340,
+         maxWidth: 320,
+         background: "#fff",
+         borderRadius: isMobile ? "18px 0 0 18px" : "14px 0 0 14px",
+         boxShadow: "0 2px 16px rgba(67,97,238,0.10)",
+         padding: isMobile ? "1.2rem 1rem 1.2rem 1rem" : "1.2rem 1.3rem",
+         margin: 0,
+         overflowY: "auto",
+         zIndex: 1002,
+         transition: "transform 0.3s",
+         transform: isMobile && !mobileOpen ? "translateX(100%)" : "translateX(0)",
+       }}
+     >
           {isMobile && (
             <button
               onClick={() => setMobileOpen(false)}
