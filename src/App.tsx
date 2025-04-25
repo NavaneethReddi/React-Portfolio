@@ -7,6 +7,9 @@ import TechNews from "./TechNews.tsx";
 import ChatWithMe from "./ChatWithMe.tsx";
 import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
+import { useTechNewsApi } from "./api.tsx";
+
+
 import './App.css';
 
 const theme = {
@@ -142,46 +145,33 @@ export  function TechLogSplash({ loading = true }: TechLogSplashProps) {
 }
 
 export default function App() {
+  const { articles, loading, apiSuccess } = useTechNewsApi(); // Only call here
+
   const [showSplash, setShowSplash] = useState(true);
-  const [techNewsDone, setTechNewsDone] = useState(false);
-  const [loading, setLoading] = useState(true);
+ 
    
 
   // Called by TechNews when API is done (success or fail)
  
-  const [techNewsData, setTechNewsData] = useState<{ articles: any[]; apiSuccess: boolean } | null>(null);
-
-  const handleTechNewsApi = (success: boolean, articles: any[] = []) => {
-    setTechNewsDone(true);
-    setLoading(false);
-    setTechNewsData({ articles, apiSuccess: success });
-  };
+ 
+   
 
   useEffect(() => {
-    if (techNewsDone) {
-      const timer = setTimeout(() => setShowSplash(false), 2000); // Hold for extra 2 seconds
+    if (!loading) {
+      const timer = setTimeout(() => setShowSplash(false), 1000); // Hold for extra 2 seconds
       return () => clearTimeout(timer);
     }
-  }, [techNewsDone]);
-  const showTechNews = techNewsData?.apiSuccess;
-
-
-  return (
+  }, [loading]);
+ 
+   return (
     <>
           {showSplash && <TechLogSplash  loading={loading}  />}
-     {!showSplash && (
-        <TechNews
-          initialArticles={techNewsData?.articles}
-          initialApiSuccess={techNewsData?.apiSuccess}
-        />
-      )}
-      {/* Hidden TechNews loader for splash, does not render UI */}
-      {showSplash && (
-        <TechNews
-          onApiSuccess={(success, articles) => handleTechNewsApi(success, articles)}
-          hidden
-        />
-      )}
+          <TechNews
+        articles={articles}
+        loading={loading}
+        apiSuccess={apiSuccess}
+        hidden={showSplash}
+      />
  
       {!showSplash && (
         
@@ -204,7 +194,7 @@ export default function App() {
               padding: "0 0 0 2vw",
               width: "100%",
               boxSizing: "border-box",
-              justifyContent: !showTechNews ? "center" : "flex-start",
+              justifyContent: !apiSuccess? "center" : "flex-start",
             }}
           >
             {/* Main Content */}
@@ -373,3 +363,7 @@ export default function App() {
     </>
   );
 }
+
+// TechNews.tsx
+// Do NOT call useTechNewsApi here, just use the props!
+ 

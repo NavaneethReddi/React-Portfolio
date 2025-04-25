@@ -1,40 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import type { Article } from "./api.tsx";
 
 export default function TechNews({
-  onApiSuccess,
-  initialArticles = [],
-  initialApiSuccess = false,
-  hidden = false,
-}: {
-  onApiSuccess?: (success: boolean, articles?: any[]) => void;
-  initialArticles?: any[];
-  initialApiSuccess?: boolean;
+  articles = [],
+  loading = false,
+  apiSuccess
+ }: {
+  articles?: Article[];
+  loading?: boolean;
+  apiSuccess?: boolean;
   hidden?: boolean;
 }) {
-  const [articles, setArticles] = useState(initialArticles);
-  const [loading, setLoading] = useState(true);
-  const [apiSuccess, setApiSuccess] = useState(initialApiSuccess);
-
-  useEffect(() => {
-    fetch(
-      "https://gnews.io/api/v4/top-headlines?category=technology&lang=en&max=7&apikey=6e068a8d7eaa698f2767ee50a2d31458"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const success = data.articles && Array.isArray(data.articles) && data.articles.length > 0;
-        setArticles(success ? data.articles : []);
-        setApiSuccess(success);
-        setLoading(false);
-        if (onApiSuccess) onApiSuccess(success, success ? data.articles : []);
-      })
-      .catch(() => {
-        setApiSuccess(false);
-        setLoading(false);
-        if (onApiSuccess) onApiSuccess(false);
-      });
-  }, [onApiSuccess]);
-
-  if (hidden || !apiSuccess) return null;
+  console.log(articles,'articles');
+  if (!apiSuccess) return null;
 
   return (
     <aside
@@ -79,7 +57,7 @@ export default function TechNews({
           {articles.map((article, idx) => (
             <li key={idx} style={{ marginBottom: "1.1rem" }}>
               <a
-                href={article.url}
+                href={article.link}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -98,8 +76,11 @@ export default function TechNews({
                 {article.title}
               </a>
               <div style={{ fontSize: "0.88rem", color: "#5f6c7b", marginBottom: 2 }}>
-                {article.source.name} &middot; {new Date(article.publishedAt).toLocaleDateString()}
-              </div>
+        {article.source_id || article.creator?.[0] || "Unknown Source"}
+        {article.pubDate && (
+          <> &middot; {new Date(article.pubDate).toLocaleDateString()}</>
+        )}
+      </div>
             </li>
           ))}
         </ul>
