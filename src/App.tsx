@@ -158,7 +158,7 @@ export default function App() {
 
   useEffect(() => {
     if (!loading) {
-      const timer = setTimeout(() => setShowSplash(false), 1000); // Hold for extra 2 seconds
+      const timer = setTimeout(() => setShowSplash(false), 500); // Hold for extra 2 seconds
       return () => clearTimeout(timer);
     }
   }, [loading]);
@@ -181,7 +181,7 @@ export default function App() {
             color: theme.text,
             fontFamily: "Inter, Segoe UI, Arial, sans-serif",
             position: "relative",
-            marginLeft: window.innerWidth <= 768 ? 0 : 300, // Move content to the right on desktop (adjust 360 to match your TechNews width + gap)
+            marginLeft: window.innerWidth <= 768 ? 0 : 280, // Move content to the right on desktop (adjust 360 to match your TechNews width + gap)
             transition: "margin-left 0.3s",
           }}
         >
@@ -302,7 +302,7 @@ export default function App() {
               letterSpacing: "0.5px",
             }}
           >
-            &copy; {new Date().getFullYear()} Your Name. All rights reserved.
+            &copy; {new Date().getFullYear()} Navaneeth Reddy Pinnapureddy. All rights reserved.
           </footer>
           {/* Responsive styles */}
           <ChatWithMe />

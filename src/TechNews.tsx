@@ -69,9 +69,9 @@ export default function TechNews({
        <aside
        style={{
          position: "fixed",
-         top: isMobile ? 0 : 100, // Set to your MenuBar height (e.g., 64px)
+         top: isMobile ? 0 : 150, // Set to your MenuBar height (e.g., 64px)
          right: 0,
-         height: isMobile ? "100vh" : "calc(100vh - 64px)", // Adjust height to not overlap MenuBar
+         height: isMobile ? "100vh" : "calc(75vh - 64px)", // Adjust height to not overlap MenuBar
          width: isMobile ? "65vw" : 340,
          maxWidth: 320,
          background: "#fff",
