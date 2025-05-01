@@ -359,6 +359,13 @@ export default function App() {
               }
             `}
           </style>
+          {/* Basic SEO */}
+          <title>Navaneeth Reddy | Portfolio</title>
+          <meta name="Navaneeth Reddy Portfolio" content="Portfolio of Navaneeth Reddy - Web Developer, Designer, and Creator. Showcasing projects, skills, and contact information." />
+          <meta name="keywords" content="Your Name, Portfolio, Web Developer, Projects, React, TypeScript" />
+          <meta name="Navaneeth Reddy" content="Navaneeth Reddy" />
+
+        
         </div>
       )}
     </>
