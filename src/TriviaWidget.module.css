@@ -1,0 +1,77 @@
+.triviaContainer {
+  background: #f0f4f8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  margin: 1rem auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.triviaQuestion {
+  margin: 1rem 0;
+  font-weight: bold;
+}
+
+.answersContainer {
+  margin: 1rem 0;
+}
+
+.answerButton {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.answerButton.correct {
+  background: #4caf50;
+  border-color: #4caf50;
+  color: #fff;
+}
+
+.answerButton.incorrect {
+  background: #f44336;
+  border-color: #f44336;
+  color: #fff;
+}
+
+.nextButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+}
+
+.score,
+.questionCount {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+@media (max-width: 480px) {
+  .triviaContainer {
+    padding: 1rem;
+    max-width: 90%;
+    margin: 0.5rem auto;
+  }
+  .answerButton {
+    font-size: 0.85rem;
+    padding: 0.45rem 0.8rem;
+  }
+  .nextButton {
+    font-size: 0.9rem;
+    padding: 0.45rem 0.8rem;
+  }
+}
+
+/* TriviaWidget.module.css */

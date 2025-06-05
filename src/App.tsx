@@ -7,7 +7,7 @@ import TechNews from "./TechNews.tsx";
 import ChatWithMe from "./ChatWithMe.tsx";
 import SkillsAndTech from "./SkillsAndTech.tsx";
 import MenuBar from "./MenuBar.tsx";
-import WeatherWidget from "./WeatherWidget.tsx";
+import TriviaWidget from "./TriviaWidget.tsx";
 
 import { useTechNewsApi } from "./api.tsx";
 
@@ -166,146 +166,159 @@ export default function App() {
   }, [loading]);
  
    return (
-    <>
-          {showSplash && <TechLogSplash  loading={loading}  />}
-          <TechNews
-        articles={articles}
-        loading={loading}
-        apiSuccess={apiSuccess}
-        hidden={showSplash}
-      />
- 
-      {!showSplash && (
-        <>
-          {/* Weather widget on the left, outside main content */}
-          <div
-            style={{
-              position: "fixed",
-              top: 100, // adjust as needed to match your MenuBar height
-              left: 0,
-              display: window.innerWidth <= 900 ? "none" : "block",
-              zIndex: 100,
-            }}
-          >
-            <WeatherWidget />
-          </div>
-          <div
-            style={{
-              minHeight: "100vh",
-              background: theme.background,
-              color: theme.text,
-              fontFamily: "Inter, Segoe UI, Arial, sans-serif",
-              position: "relative",
-              marginLeft: window.innerWidth <= 768 ? 0 : 280, // Move content to the right on desktop (adjust 360 to match your TechNews width + gap)
-              transition: "margin-left 0.3s",
-            }}
-          >
-            <MenuBar />
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                maxWidth: 1600,
-                margin: "0 auto",
-                padding: "0 0 0 2vw",
-                width: "100%",
-                boxSizing: "border-box",
-                justifyContent: !apiSuccess ? "center" : "flex-start",
-              }}
-            >
-              {/* Main Content */}
-              <main
-                style={{
-                  flex: 1,
-                  padding: "2.5rem 2vw 2.5rem 0",
-                  maxWidth: 1050,
-                  width: "100%",
-                  boxSizing: "border-box",
-                }}
-              >
-                <section
-                  id="hero"
-                  style={{
-                    background: theme.card,
-                    borderRadius: "22px",
-                    boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
-                    marginBottom: "2.5rem",
-                    padding: "2.5rem 2rem",
-                    border: `1.5px solid ${theme.border}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <Hero />
-                </section>
-                <section
-                  id="skills"
-                  style={{
-                    background: theme.card,
-                    borderRadius: "22px",
-                    boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
-                    marginBottom: "2.5rem",
-                    padding: "2.5rem 2rem",
-                    border: `1.5px solid ${theme.border}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <SkillsAndTech />
-                </section>
-                <section
-                  id="projects"
-                  style={{
-                    background: theme.card,
-                    borderRadius: "22px",
-                    boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
-                    marginBottom: "2.5rem",
-                    padding: "2.5rem 2rem",
-                    border: `1.5px solid ${theme.border}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <Projects />
-                </section>
-                {/* <Certificate /> */}
-                <section
-                  id="testimonials"
-                  style={{
-                    background: theme.card,
-                    borderRadius: "22px",
-                    boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
-                    marginBottom: "2.5rem",
-                    padding: "2.5rem 2rem",
-                    border: `1.5px solid ${theme.border}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <Testimonial />
-                </section>
-                <section
-                  id="contact"
-                  style={{
-                    background: theme.card,
-                    borderRadius: "22px",
-                    boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
-                    marginBottom: "2.5rem",
-                    padding: "2.5rem 2rem",
-                    border: `1.5px solid ${theme.border}`,
-                    width: "100%",
-                    boxSizing: "border-box",
-                  }}
-                >
-                  <Contact />
-                </section>
-              </main>
-            </div>
-             
-            {/* Responsive styles */}
-            <ChatWithMe />
-            <style>
-              {`
+     <>
+       {showSplash && <TechLogSplash loading={loading} />}
+       <TechNews
+         articles={articles}
+         loading={loading}
+         apiSuccess={apiSuccess}
+         hidden={showSplash}
+       />
+
+       {!showSplash && (
+         <>
+           {/* Weather widget on the left, outside main content */}
+           <div
+             style={{
+               position: "fixed",
+               top: 100, // adjust as needed to match your MenuBar height
+               left: 0,
+               display: window.innerWidth <= 900 ? "none" : "block",
+               zIndex: 100,
+             }}
+           >
+             <div
+               style={{
+                 width: 250,
+                 flexShrink: 0,
+                 background: "#fff",
+                 padding: "1rem",
+                 borderRadius: "12px",
+                 boxShadow: "0 2px 12px rgba(67,97,238,0.1)",
+                 marginTop: 50,
+                 
+               }}
+             >
+               <TriviaWidget />
+             </div>{" "}
+           </div>
+           <div
+             style={{
+               minHeight: "100vh",
+               background: theme.background,
+               color: theme.text,
+               fontFamily: "Inter, Segoe UI, Arial, sans-serif",
+               position: "relative",
+               marginLeft: window.innerWidth <= 768 ? 0 : 280, // Move content to the right on desktop (adjust 360 to match your TechNews width + gap)
+               transition: "margin-left 0.3s",
+             }}
+           >
+             <MenuBar />
+             <div
+               style={{
+                 display: "flex",
+                 flexDirection: "row",
+                 maxWidth: 1600,
+                 margin: "0 auto",
+                 padding: "0 0 0 2vw",
+                 width: "100%",
+                 boxSizing: "border-box",
+                 justifyContent: !apiSuccess ? "center" : "flex-start",
+               }}
+             >
+               {/* Main Content */}
+               <main
+                 style={{
+                   flex: 1,
+                   padding: "2.5rem 2vw 2.5rem 0",
+                   maxWidth: 1050,
+                   width: "100%",
+                   boxSizing: "border-box",
+                 }}
+               >
+                 <section
+                   id="hero"
+                   style={{
+                     background: theme.card,
+                     borderRadius: "22px",
+                     boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
+                     marginBottom: "2.5rem",
+                     padding: "2.5rem 2rem",
+                     border: `1.5px solid ${theme.border}`,
+                     width: "100%",
+                     boxSizing: "border-box",
+                   }}
+                 >
+                   <Hero />
+                 </section>
+                 <section
+                   id="skills"
+                   style={{
+                     background: theme.card,
+                     borderRadius: "22px",
+                     boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
+                     marginBottom: "2.5rem",
+                     padding: "2.5rem 2rem",
+                     border: `1.5px solid ${theme.border}`,
+                     width: "100%",
+                     boxSizing: "border-box",
+                   }}
+                 >
+                   <SkillsAndTech />
+                 </section>
+                 <section
+                   id="projects"
+                   style={{
+                     background: theme.card,
+                     borderRadius: "22px",
+                     boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
+                     marginBottom: "2.5rem",
+                     padding: "2.5rem 2rem",
+                     border: `1.5px solid ${theme.border}`,
+                     width: "100%",
+                     boxSizing: "border-box",
+                   }}
+                 >
+                   <Projects />
+                 </section>
+                 {/* <Certificate /> */}
+                 <section
+                   id="testimonials"
+                   style={{
+                     background: theme.card,
+                     borderRadius: "22px",
+                     boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
+                     marginBottom: "2.5rem",
+                     padding: "2.5rem 2rem",
+                     border: `1.5px solid ${theme.border}`,
+                     width: "100%",
+                     boxSizing: "border-box",
+                   }}
+                 >
+                   <Testimonial />
+                 </section>
+                 <section
+                   id="contact"
+                   style={{
+                     background: theme.card,
+                     borderRadius: "22px",
+                     boxShadow: "0 4px 32px rgba(67,97,238,0.10)",
+                     marginBottom: "2.5rem",
+                     padding: "2.5rem 2rem",
+                     border: `1.5px solid ${theme.border}`,
+                     width: "100%",
+                     boxSizing: "border-box",
+                   }}
+                 >
+                   <Contact />
+                 </section>
+               </main>
+             </div>
+
+             {/* Responsive styles */}
+             <ChatWithMe />
+             <style>
+               {`
                 ::selection {
                   background: ${theme.accent2};
                   color: #232526;
@@ -356,34 +369,41 @@ export default function App() {
                   }
                 }
               `}
-            </style>
-            {/* Basic SEO */}
-            <title>Navaneeth Reddy | Portfolio</title>
-            <meta name="Navaneeth Reddy Portfolio" content="Portfolio of Navaneeth Reddy - Web Developer, Designer, and Creator. Showcasing projects, skills, and contact information." />
-            <meta name="keywords" content="Your Name, Portfolio, Web Developer, Projects, React, TypeScript" />
-            <meta name="Navaneeth Reddy" content="Navaneeth Reddy" />
-          </div>
-          {/* Additional Footer */}
-          <footer
-            style={{
-              width: "100%",
-              textAlign: "center",
-              padding: "1.2rem 0 1.2rem 0",
-              color: "#bfc9d1",
-              fontSize: "1rem",
-              fontWeight: 500,
-              background: "transparent",
-              position: "relative",
-              bottom: 0,
-              left: 0,
-            }}
-          >
-            © {new Date().getFullYear()} Navaneeth Reddy Pinnapureddy. All rights reserved.
-          </footer>
-        </>
-      )}
-    </>
-  );
+             </style>
+             {/* Basic SEO */}
+             <title>Navaneeth Reddy | Portfolio</title>
+             <meta
+               name="Navaneeth Reddy Portfolio"
+               content="Portfolio of Navaneeth Reddy - Web Developer, Designer, and Creator. Showcasing projects, skills, and contact information."
+             />
+             <meta
+               name="keywords"
+               content="Your Name, Portfolio, Web Developer, Projects, React, TypeScript"
+             />
+             <meta name="Navaneeth Reddy" content="Navaneeth Reddy" />
+           </div>
+           {/* Additional Footer */}
+           <footer
+             style={{
+               width: "100%",
+               textAlign: "center",
+               padding: "1.2rem 0 1.2rem 0",
+               color: "#bfc9d1",
+               fontSize: "1rem",
+               fontWeight: 500,
+               background: "transparent",
+               position: "relative",
+               bottom: 0,
+               left: 0,
+             }}
+           >
+             © {new Date().getFullYear()} Navaneeth Reddy Pinnapureddy. All
+             rights reserved.
+           </footer>
+         </>
+       )}
+     </>
+   );
 }
 
 // TechNews.tsx
