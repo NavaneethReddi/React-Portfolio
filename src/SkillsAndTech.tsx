@@ -47,7 +47,11 @@ const techLogos = [
     alt: "Node.js",
     title: "Node.js",
   },
-  // Add more logos as needed
+   
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg", alt: "Svelte logo", title: "Svelte" },     
+  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", alt: "Next.js logo", title: "Next" }, // Added Next.js
+
+  
 ];
 
 const rowHeight = 160;
