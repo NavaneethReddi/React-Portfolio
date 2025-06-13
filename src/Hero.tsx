@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 import { FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 import NavaneethPhoto from "./Navaneeth_linkedin.jpeg";
-import DecryptedText from "./DecryptedText.tsx";
 
-const LINKEDIN_URL =
-  "https://www.linkedin.com/in/navaneeth-reddy-pinnapureddy/";
+
+const LINKEDIN_URL = "https://www.linkedin.com/in/navaneeth-reddy-pinnapureddy/";
+
 
 const heroBg =
   "linear-gradient(120deg, #e0e7ef 0%, #f8fafc 100%, #e7f1ff 100%)";
@@ -90,12 +90,15 @@ const Hero: React.FC = React.memo(() => (
         zIndex: 1,
         textShadow: "0 2px 8px rgba(67,97,238,0.06)",
       }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.5, duration: 0.6 }}
     >
-      <DecryptedText
-        text="Hi, I'm Navaneeth Reddy"
-        animateOn="view"
-        revealDirection="center"
-      />
+      Hi, I'm Navaneeth Reddy
+
+
+
+
     </motion.h1>
     <motion.p
       style={{
@@ -105,14 +108,16 @@ const Hero: React.FC = React.memo(() => (
         fontWeight: 600,
         zIndex: 1,
       }}
-      
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.7, duration: 0.6 }}
     >
-       <DecryptedText
-        text="Principal Architect &nbsp;|&nbsp; UI/UX Enthusiast"
-        animateOn="view"
-        revealDirection="center"
-      />
-    
+      Principal Architect &nbsp;|&nbsp; UI/UX Enthusiast
+
+
+
+
+
     </motion.p>
 
     {/* LinkedIn Button */}
@@ -140,14 +145,15 @@ const Hero: React.FC = React.memo(() => (
           boxShadow: "0 2px 8px rgba(0,119,181,0.10)",
           transition: "background 0.2s, transform 0.2s",
         }}
-        onMouseOver={(e) => (e.currentTarget.style.background = "#005983")}
-        onMouseOut={(e) => (e.currentTarget.style.background = "#0077b5")}
+        onMouseOver={e => (e.currentTarget.style.background = "#005983")}
+        onMouseOut={e => (e.currentTarget.style.background = "#0077b5")}
       >
         <FaLinkedin size={22} /> Connect on LinkedIn
       </a>
     </motion.div>
 
-     <motion.div
+    {/* About Card */}
+    <motion.div
       style={{
         marginTop: "2rem",
         background: "#fff",
@@ -162,21 +168,21 @@ const Hero: React.FC = React.memo(() => (
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 1.1, duration: 0.7 }}
     >
-      <h2
-        style={{
-          fontSize: "1.35rem",
-          color: "#22223b",
-          marginBottom: "0.8rem",
-          fontWeight: 700,
-        }}
-      >
+      <h2 style={{ fontSize: "1.35rem", color: "#22223b", marginBottom: "0.8rem", fontWeight: 700 }}>
+
+
+
+
+
+
+
         About Me
       </h2>
       <p style={{ color: "#5f6c7b", fontSize: "1.08rem", lineHeight: 1.7 }}>
-        Passionate developer with experience in building responsive web apps
-        using React, Angular, Vue, and more.
-        <br />I love crafting beautiful user experiences and leading teams to
-        deliver high-quality products.
+        Passionate developer with experience in building responsive web apps using React, Angular, Vue, and more.<br />
+        I love crafting beautiful user experiences and leading teams to deliver high-quality products.
+
+
       </p>
     </motion.div>
   </motion.section>
