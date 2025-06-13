@@ -48,8 +48,21 @@ const techLogos = [
     title: "Node.js",
   },
    
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg", alt: "Svelte logo", title: "Svelte" },     
-  { src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg", alt: "Next.js logo", title: "Next" }, // Added Next.js
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg",
+    alt: "Svelte logo",
+    title: "Svelte",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    alt: "Next.js logo",
+    title: "Next",
+  },
+  {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg",
+    alt: "Storybook logo",
+    title: "Storybook",
+  }
 
   
 ];
