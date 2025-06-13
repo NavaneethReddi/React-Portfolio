@@ -147,8 +147,7 @@ const Hero: React.FC = React.memo(() => (
       </a>
     </motion.div>
 
-    {/* About Card */}
-    <motion.div
+     <motion.div
       style={{
         marginTop: "2rem",
         background: "#fff",
