@@ -10,6 +10,8 @@ import MenuBar from "./MenuBar.tsx";
 import TriviaWidget from "./TriviaWidget.tsx";
 
 import { useTechNewsApi } from "./api.tsx";
+import SplashCursor from './SplashCursor.tsx'
+
 
 
 import './App.css';
@@ -168,6 +170,7 @@ export default function App() {
    return (
      <>
        {showSplash && <TechLogSplash loading={loading} />}
+       <SplashCursor />
        <TechNews
          articles={articles}
          loading={loading}
