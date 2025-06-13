@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react";
 import { FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
 import NavaneethPhoto from "./Navaneeth_linkedin.jpeg";
@@ -9,6 +9,25 @@ const LINKEDIN_URL = "https://www.linkedin.com/in/navaneeth-reddy-pinnapureddy/"
 
 const heroBg =
   "linear-gradient(120deg, #e0e7ef 0%, #f8fafc 100%, #e7f1ff 100%)";
+
+
+  const TypewriterText: React.FC<{ text: string; speed?: number; style?: React.CSSProperties }> = ({
+    text,
+    speed = 50,
+    style,
+  }) => {
+    const [displayedText, setDisplayedText] = useState("");
+    useEffect(() => {
+      let index = 0;
+      const interval = setInterval(() => {
+        setDisplayedText((prev) => prev + text.charAt(index));
+        index += 1;
+        if (index === text.length) clearInterval(interval);
+      }, speed);
+      return () => clearInterval(interval);
+    }, [text, speed]);
+    return <p style={style}>{displayedText}</p>;
+  };
 
 const Hero: React.FC = React.memo(() => (
   <motion.section
@@ -169,21 +188,16 @@ const Hero: React.FC = React.memo(() => (
       transition={{ delay: 1.1, duration: 0.7 }}
     >
       <h2 style={{ fontSize: "1.35rem", color: "#22223b", marginBottom: "0.8rem", fontWeight: 700 }}>
-
-
-
-
-
-
-
         About Me
       </h2>
-      <p style={{ color: "#5f6c7b", fontSize: "1.08rem", lineHeight: 1.7 }}>
-        Passionate developer with experience in building responsive web apps using React, Angular, Vue, and more.<br />
-        I love crafting beautiful user experiences and leading teams to deliver high-quality products.
-
-
-      </p>
+      <TypewriterText
+        text={
+          "Passionate developer with experience in building responsive web apps using React, Angular, Vue, and more. " +
+          "I love crafting beautiful user experiences and leading teams to deliver high-quality products."
+        }
+        speed={50}
+        style={{ color: "#5f6c7b", fontSize: "1.08rem", lineHeight: 1.7 }}
+      />
     </motion.div>
   </motion.section>
 ));
