@@ -195,7 +195,7 @@ const Hero: React.FC = React.memo(() => (
           "Passionate developer with experience in building responsive web apps using React, Angular, Vue, and more. " +
           "I love crafting beautiful user experiences and leading teams to deliver high-quality products."
         }
-        speed={50}
+        speed={40}
         style={{ color: "#5f6c7b", fontSize: "1.08rem", lineHeight: 1.7 }}
       />
     </motion.div>
